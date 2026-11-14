@@ -14,6 +14,6 @@ public class Animal {
 
     public String eat() {
         // TODO 1：返回“名字在吃东西”，例如“小黑在吃东西”。
-        throw new UnsupportedOperationException("待完成 TODO 1：动物吃东西");
+        return this.name + "在吃东西";
     }
 }

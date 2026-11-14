@@ -5,6 +5,6 @@ public class Cat extends Animal {
     public String catchMouse() {
         // TODO 2：通过继承得到的 getName()，返回“名字在抓老鼠”。
         // 不要在这里复制一份 name 字段或 getName/setName/eat。
-        throw new UnsupportedOperationException("待完成 TODO 2：猫抓老鼠");
+        return getName() + "在抓老鼠";
     }
 }

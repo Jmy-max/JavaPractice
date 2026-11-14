@@ -10,11 +10,21 @@ public class Loan {
 
     public boolean borrow() {
         // TODO 1：在馆时借出，改状态并返回 true；已经借出时返回 false。
-        throw new UnsupportedOperationException("待完成 TODO 1：借书");
+        if(state == LoanState.AVAILABLE)
+        {
+            state = LoanState.BORROWED;
+            return true;
+        }
+        return false;
     }
 
     public boolean returnBook() {
         // TODO 2：已借出时归还，改状态并返回 true；本来在馆时返回 false。
-        throw new UnsupportedOperationException("待完成 TODO 2：还书");
+        if(state == LoanState.BORROWED)
+        {
+            state = LoanState.AVAILABLE;
+            return true;
+        }
+        return false;
     }
 }

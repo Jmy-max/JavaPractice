@@ -14,7 +14,8 @@ public class Student {
     public Student(String name, int age) {
         // TODO 1：用参数初始化当前对象的 name 和 age。
         // C++ 的 this->成员，对应 Java 中的 this.字段。
-        throw new UnsupportedOperationException("待完成 TODO 1：构造器");
+        this.name = name;
+        this.age = age;
     }
 
     public String getName() {
@@ -29,11 +30,13 @@ public class Student {
         // TODO 2：合法范围为 0～150（包含两端）。
         // 合法：修改当前对象的 age，返回 true。
         // 非法：保持原值，返回 false。
-        throw new UnsupportedOperationException("待完成 TODO 2：修改年龄");
+        if(age < 0 || age > 150) return false;
+        this.age = age;
+        return true;
     }
 
     public void birthday() {
         // TODO 3：age 小于 150 时加 1；已经是 150 时保持不变。
-        throw new UnsupportedOperationException("待完成 TODO 3：过生日");
+        if(this.age < 150) ++this.age;
     }
 }

@@ -11,7 +11,9 @@ public class Book {
     public Book(String title) {
         // TODO 1：共享计数加 1，把此时的编号和传入标题保存到本对象。
         // final id/title 都必须在构造器正常结束前完成初始化。
-        throw new UnsupportedOperationException("待完成 TODO 1：创建图书并编号");
+        createdCount++;
+        this.id = createdCount;
+        this.title = title;
     }
 
     public int getId() {
@@ -24,6 +26,6 @@ public class Book {
 
     public static int getCreatedCount() {
         // TODO 2：返回实际创建的图书对象总数。
-        throw new UnsupportedOperationException("待完成 TODO 2：读取共享计数");
+        return createdCount;
     }
 }

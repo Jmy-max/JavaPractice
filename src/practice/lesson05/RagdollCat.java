@@ -4,6 +4,6 @@ package practice.lesson05;
 public class RagdollCat extends Cat {
     public String rest() {
         // TODO 3：使用继承来的 getName()，返回“名字在休息”。
-        throw new UnsupportedOperationException("待完成 TODO 3：布偶猫休息");
+        return getName() + "在休息";
     }
 }
