@@ -1,0 +1,80 @@
+# Java 面向对象：从看懂到亲手写
+
+课程范围：你提供的目录第 8 章至第 11 章第 03 课“继承的特点”。先按顺序练，今天从第 1 题开始。
+
+| 题号 | 练习 | 亲手练什么 | C++ 对照 |
+|---|---|---|---|
+| 01 | 学生档案 | 构造器、this、private、修改年龄与边界 | 构造函数、成员访问、this-> |
+| 02 | 成绩与引用 | 共享对象、修改对象、形参重新赋值 | 对象复制、指针副本、引用传参 |
+| 03 | 图书编号 | static 共享计数、final 实例字段 | 静态数据成员、const 与 final |
+| 04 | 借阅状态 | 用 enum 表达状态，控制借还转换 | enum class 与枚举类型 |
+| 05 | 动物继承 | 单继承、多层继承、复用父类成员 | class Cat : public Animal |
+
+后面的继承成员查找、super 构造调用、重写、多态、抽象类、接口暂不作为题目要求。
+
+## 在 IDEA 里怎么做
+
+1. 打开本目录 `D:\codex\Java\learning\oop-practice`，项目名 OopPractice。
+2. 当前练习选 `src/practice/lesson01/Student.java`，只填写 TODO 1～3。
+3. `Main.java` 是已经准备好的检查入口。打开它，点 `main` 左侧绿色三角运行。顶部也准备了 01～05 的运行配置。
+4. 全部检查通过时，会输出 `ALL CHECKS PASSED`。如果出现“待完成 TODO”，说明还有占位行没替换；如果出现“检查失败”，看提示中的实际值和期望值。
+5. 保存后告诉学习助手“第 1 题写好了”。助手会读取、编译运行并解释结果，不必复制整份代码。
+
+SDK 已选择本机现有 JDK 21；不需要 Maven、Gradle、JUnit 或额外依赖。编译产物集中在原学习项目 `.build/oop-practice/`。
+
+`practice.support.Checks` 是预先写好的检查工具，Main 和它暂时不用修改。占位的 `throw new UnsupportedOperationException(...)` 只是让尚未完成的方法停止并提示 TODO；它不要求你现在学习异常处理。把整行占位语句替换为自己的实现即可。
+
+## 01 学生档案：先做这一题
+
+修改 `src/practice/lesson01/Student.java`。
+
+- 字段与 getter 已准备好。构造器接收姓名、年龄，调用时保证姓名非空、年龄在 0～150 内；用同名参数初始化对应字段。
+- `setAge(int age)`：0～150（含两端）是合法年龄。合法时修改并返回 true；非法时保持原年龄并返回 false。
+- `birthday()`：年龄小于 150 时加 1，等于 150 时保持不变。
+- 多个学生各自保存年龄，修改一个学生不能影响另一个。
+
+小提示：Java 用 `this.字段` 区分同名参数；可以对照 C++ 的 `this->成员`。先自己写，不需要把旧的数组、输入题补完。
+
+## 02 成绩与引用
+
+修改 `src/practice/lesson02/ReferenceLab.java` 的两个 TODO。
+
+- `addTen(Score score)`：让参数所指成绩对象的 value 增加 10。
+- `replaceLocal(Score score)`：让形参 score 改为引用一个新建的、value 为 99 的对象，再返回这个形参供 Main 观察；不要修改原对象的 value。Main 把返回值存入 replacement，并没有赋给 a。
+- 运行前先预测 Main 中 a、alias、independent 的成绩，再观察“改对象”和“改形参指向”的不同。
+
+对照重点：Java 对象参数复制引用值；这不同于 C++ `Score&` 形参。C++ 直接对象复制与 Java 引用赋值也要分开。
+
+## 03 图书编号
+
+修改 `src/practice/lesson03/Book.java`。
+
+- 每创建一个 Book，所有图书共享的 createdCount 增加 1。
+- 编号从 1 连续分配，每个对象的 final id 保存它创建时的编号；final title 保存传入的标题。
+- 静态方法 `getCreatedCount()` 返回目前实际创建的图书数。
+- 多写一个引用变量指向已有图书，不算新建图书。
+
+对照重点：区分类共享数据和每个对象自己的数据；final 字段不等于整个对象都不可变化。
+
+## 04 借阅状态
+
+修改 `src/practice/lesson04/Loan.java`。
+
+- 枚举 LoanState 已定义为 AVAILABLE、BORROWED，初始状态为 AVAILABLE。
+- `borrow()`：仅 AVAILABLE 时改为 BORROWED 并返回 true；已借出时保持状态并返回 false。
+- `returnBook()`：仅 BORROWED 时改为 AVAILABLE 并返回 true；本来就在馆时保持状态并返回 false。
+
+对照重点：先使用枚举表示有限状态，不要求背 enum 的底层实现或引入继承知识。
+
+## 05 动物继承
+
+关系已准备好：`Animal → Cat → RagdollCat`（箭头表示从父类到子类）。先沿类声明看清这条链，再写三个 TODO。
+
+- Animal 的 `eat()` 返回“名字在吃东西”，例如“小黑在吃东西”。
+- Cat 的 `catchMouse()` 返回“名字在抓老鼠”。
+- RagdollCat 的 `rest()` 返回“名字在休息”。
+- Cat 和 RagdollCat 都通过继承使用已有的 setName/getName/eat；不要复制一份同名字段或父类方法到子类。
+
+这里没有覆盖父类方法，也没有父类引用指向子类的多态用法，不需要 super 或自定义继承构造器。
+
+完成后口头说明：Cat 能否直接继承两个类？RagdollCat 是否能使用 Animal 提供的公开方法？这些结论和 C++ 的类继承有哪些不同？
