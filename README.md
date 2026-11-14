@@ -1,80 +1,64 @@
-# Java 面向对象：从看懂到亲手写
+# JavaPractice
 
-课程范围：你提供的目录第 8 章至第 11 章第 03 课“继承的特点”。先按顺序练，今天从第 1 题开始。
+记录我在学习 Java 过程中编写的练习代码、知识点验证和阶段性实践，通过持续的代码提交保留学习过程。
 
-| 题号 | 练习 | 亲手练什么 | C++ 对照 |
-|---|---|---|---|
-| 01 | 学生档案 | 构造器、this、private、修改年龄与边界 | 构造函数、成员访问、this-> |
-| 02 | 成绩与引用 | 共享对象、修改对象、形参重新赋值 | 对象复制、指针副本、引用传参 |
-| 03 | 图书编号 | static 共享计数、final 实例字段 | 静态数据成员、const 与 final |
-| 04 | 借阅状态 | 用 enum 表达状态，控制借还转换 | enum class 与枚举类型 |
-| 05 | 动物继承 | 单继承、多层继承、复用父类成员 | class Cat : public Animal |
+这个仓库会随着学习进度不断更新。已有的 C/C++ 基础会作为对照，重点关注 Java 在对象引用、参数传递、类与对象、内存管理等方面的区别。
 
-后面的继承成员查找、super 构造调用、重写、多态、抽象类、接口暂不作为题目要求。
+## 内容安排
 
-## 在 IDEA 里怎么做
+- **基础语法**：数据类型、运算、流程控制、数组和方法。
+- **面向对象**：类与对象、封装、构造器、`this`、`static`、`final`、枚举与继承，并逐步补充多态、抽象类和接口。
+- **常用类与集合**：根据学习进度补充字符串、集合和相关练习。
+- **异常与文件操作**：逐步练习异常处理、文件读写及相关知识。
+- **综合实践**：用小型程序串联已经学过的内容。
 
-1. 打开本目录 `D:\codex\Java\learning\oop-practice`，项目名 OopPractice。
-2. 当前练习选 `src/practice/lesson01/Student.java`，只填写 TODO 1～3。
-3. `Main.java` 是已经准备好的检查入口。打开它，点 `main` 左侧绿色三角运行。顶部也准备了 01～05 的运行配置。
-4. 全部检查通过时，会输出 `ALL CHECKS PASSED`。如果出现“待完成 TODO”，说明还有占位行没替换；如果出现“检查失败”，看提示中的实际值和期望值。
-5. 保存后告诉学习助手“第 1 题写好了”。助手会读取、编译运行并解释结果，不必复制整份代码。
+以上是仓库的内容方向，实际已收录的代码见下方索引；后续练习会继续补充。
 
-SDK 已选择本机现有 JDK 21；不需要 Maven、Gradle、JUnit 或额外依赖。编译产物集中在原学习项目 `.build/oop-practice/`。
+## 当前代码索引
 
-`practice.support.Checks` 是预先写好的检查工具，Main 和它暂时不用修改。占位的 `throw new UnsupportedOperationException(...)` 只是让尚未完成的方法停止并提示 TODO；它不要求你现在学习异常处理。把整行占位语句替换为自己的实现即可。
+| 目录 | 练习主题 | 涉及内容 |
+|---|---|---|
+| [lesson01](src/practice/lesson01/) | 学生档案 | 构造器、`this`、封装、年龄校验、实例方法 |
+| [lesson02](src/practice/lesson02/) | 成绩与引用 | 共享对象、引用赋值、对象参数传递 |
+| [lesson03](src/practice/lesson03/) | 图书编号 | `static` 共享计数、`final` 实例字段 |
+| [lesson04](src/practice/lesson04/) | 借阅状态 | 枚举、状态转换 |
+| [lesson05](src/practice/lesson05/) | 动物继承 | 单继承、多层继承、父类方法复用 |
+| [support](src/practice/support/) | 检查工具 | 为练习提供结果检查 |
 
-## 01 学生档案：先做这一题
+部分练习保留了待补全的 TODO。收录在仓库中表示已经整理到对应主题，不代表全部实现完成。
 
-修改 `src/practice/lesson01/Student.java`。
+具体题目要求和检查方式见 [面向对象练习说明](docs/面向对象练习.md)。
 
-- 字段与 getter 已准备好。构造器接收姓名、年龄，调用时保证姓名非空、年龄在 0～150 内；用同名参数初始化对应字段。
-- `setAge(int age)`：0～150（含两端）是合法年龄。合法时修改并返回 true；非法时保持原年龄并返回 false。
-- `birthday()`：年龄小于 150 时加 1，等于 150 时保持不变。
-- 多个学生各自保存年龄，修改一个学生不能影响另一个。
+## 主要目录
 
-小提示：Java 用 `this.字段` 区分同名参数；可以对照 C++ 的 `this->成员`。先自己写，不需要把旧的数组、输入题补完。
+```text
+JavaPractice/
+├── README.md
+├── docs/
+│   └── 面向对象练习.md
+└── src/
+    └── practice/
+        ├── lesson01/
+        ├── lesson02/
+        ├── lesson03/
+        ├── lesson04/
+        ├── lesson05/
+        └── support/
+```
 
-## 02 成绩与引用
+目录会随新的学习内容扩展，已有练习通过索引查找。
 
-修改 `src/practice/lesson02/ReferenceLab.java` 的两个 TODO。
+## 运行方式
 
-- `addTen(Score score)`：让参数所指成绩对象的 value 增加 10。
-- `replaceLocal(Score score)`：让形参 score 改为引用一个新建的、value 为 99 的对象，再返回这个形参供 Main 观察；不要修改原对象的 value。Main 把返回值存入 replacement，并没有赋给 a。
-- 运行前先预测 Main 中 a、alias、independent 的成绩，再观察“改对象”和“改形参指向”的不同。
+当前练习使用 **JDK 21**，可以在 **IntelliJ IDEA** 中打开仓库并设置项目 SDK。
 
-对照重点：Java 对象参数复制引用值；这不同于 C++ `Score&` 形参。C++ 直接对象复制与 Java 引用赋值也要分开。
+每个练习包包含独立的 `Main.java`，运行其中的 `main` 方法即可执行对应检查。当前这些练习不依赖 Maven、Gradle 或第三方库。
 
-## 03 图书编号
+完成对应 TODO 后，检查全部通过时会输出 `ALL CHECKS PASSED`；尚未实现的方法会给出待完成提示。具体要求以题目说明为准。
 
-修改 `src/practice/lesson03/Book.java`。
+## 学习记录方式
 
-- 每创建一个 Book，所有图书共享的 createdCount 增加 1。
-- 编号从 1 连续分配，每个对象的 final id 保存它创建时的编号；final title 保存传入的标题。
-- 静态方法 `getCreatedCount()` 返回目前实际创建的图书数。
-- 多写一个引用变量指向已有图书，不算新建图书。
-
-对照重点：区分类共享数据和每个对象自己的数据；final 字段不等于整个对象都不可变化。
-
-## 04 借阅状态
-
-修改 `src/practice/lesson04/Loan.java`。
-
-- 枚举 LoanState 已定义为 AVAILABLE、BORROWED，初始状态为 AVAILABLE。
-- `borrow()`：仅 AVAILABLE 时改为 BORROWED 并返回 true；已借出时保持状态并返回 false。
-- `returnBook()`：仅 BORROWED 时改为 AVAILABLE 并返回 true；本来就在馆时保持状态并返回 false。
-
-对照重点：先使用枚举表示有限状态，不要求背 enum 的底层实现或引入继承知识。
-
-## 05 动物继承
-
-关系已准备好：`Animal → Cat → RagdollCat`（箭头表示从父类到子类）。先沿类声明看清这条链，再写三个 TODO。
-
-- Animal 的 `eat()` 返回“名字在吃东西”，例如“小黑在吃东西”。
-- Cat 的 `catchMouse()` 返回“名字在抓老鼠”。
-- RagdollCat 的 `rest()` 返回“名字在休息”。
-- Cat 和 RagdollCat 都通过继承使用已有的 setName/getName/eat；不要复制一份同名字段或父类方法到子类。
-
-这里没有覆盖父类方法，也没有父类引用指向子类的多态用法，不需要 super 或自定义继承构造器。
-
-完成后口头说明：Cat 能否直接继承两个类？RagdollCat 是否能使用 Animal 提供的公开方法？这些结论和 C++ 的类继承有哪些不同？
+- 每次练习围绕一个或几个明确的知识点展开。
+- 在注释或练习说明中记录关键思路、容易混淆的地方和必要的 C++ 对照。
+- 完成练习或修正问题后，提交一次有明确说明的修改，保留实现与改进过程。
+- 后续新增内容时，同步更新代码索引，方便回顾不同阶段的学习记录。
