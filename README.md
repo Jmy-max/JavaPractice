@@ -52,7 +52,7 @@ JavaPractice/
 
 当前练习使用 **JDK 21**，可以在 **IntelliJ IDEA** 中打开仓库并设置项目 SDK。
 
-每个练习包包含独立的 `Main.java`，运行其中的 `main` 方法即可执行对应检查。当前这些练习不依赖 Maven、Gradle 或第三方库。
+每个练习包包含独立的 `Main.java`，运行其中的 `menu` 方法即可执行对应检查。当前这些练习不依赖 Maven、Gradle 或第三方库。
 
 完成对应 TODO 后，检查全部通过时会输出 `ALL CHECKS PASSED`；尚未实现的方法会给出待完成提示。具体要求以题目说明为准。
 
